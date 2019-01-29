@@ -1,0 +1,15 @@
+{
+  "name": "serverless",
+  "version": "1.0.0",
+  "description": "serverless + ssm + shennanigans",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "storycoding",
+  "license": "ISC",
+  "dependencies": {
+    "serverless-dotenv-plugin": "^2.0.1",
+    "serverless-offline": "^4.2.0"
+  }
+}

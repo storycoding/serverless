@@ -1,0 +1,27 @@
+service: report
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  region: eu-west-2
+  timeout: 30
+  stage: ${opt:stage,'dev'}
+
+custom:
+  stage: ${self:provider.stage}
+  prod:
+    MESSAGE: ${ssm:prod_MESSAGE}
+  dev:
+    MESSAGE: ${ssm:dev_MESSAGE}
+  local:
+    MESSAGE: 'running on local'
+
+functions:
+  report: # this is a lambda
+    description: logs any relevant information regarding the current build
+    handler: src/report.handler
+    environment: # envs must be set per lambda
+      MESSAGE: ${self:custom.${self:provider.stage}.MESSAGE}
+plugins:
+  - serverless-dotenv-plugin # to enable exporting envs offline
+  - serverless-offline # for offline development
